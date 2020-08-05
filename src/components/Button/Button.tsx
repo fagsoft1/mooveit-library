@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
+import {ThemeContext} from "../Themes/ThemeContext";
 
 interface IButton {
     text: string,
@@ -6,6 +7,10 @@ interface IButton {
 }
 
 const Button = ({text, onClick}: IButton) => {
-    return <button onClick={onClick}>{text}</button>;
+    const theme = useContext(ThemeContext);
+    return <button onClick={onClick} style={{
+        background: theme.palette.primary.main,
+        color: theme.palette.primary.contrast
+    }}>{text}</button>;
 };
 export {Button}

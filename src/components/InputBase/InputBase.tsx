@@ -1,4 +1,5 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useContext} from "react";
+import {ThemeContext} from "../Themes/ThemeContext";
 
 export interface IInputBase {
     label: string,
@@ -7,8 +8,9 @@ export interface IInputBase {
 }
 
 const InputBase = ({label, name, children}: IInputBase) => {
+    const theme = useContext(ThemeContext);
     return <Fragment>
-        <label htmlFor={name}><span>{label} </span></label>
+        <label style={{color: theme.palette.primary.main}} htmlFor={name}><span>{label} </span></label>
         {children}
     </Fragment>
 }

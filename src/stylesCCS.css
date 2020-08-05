@@ -1,0 +1,29 @@
+ul.options {
+  padding: 0;
+  display: block;
+  list-style: none;
+  width: 30rem;
+  transition: width 0.3s;
+  margin: 0;
+  position: relative;
+}
+ul.options li {
+  display: block;
+  background: #fff;
+  padding: 5px;
+  width: 100%;
+  border-radius: 2px;
+}
+ul.options li:hover {
+  font-weight: bold;
+  color: #00b4cc;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+ul.options li.option-active {
+  background: #f5f5f5;
+  color: #00b4cc;
+}
+.no-options {
+  color: #fff;
+}

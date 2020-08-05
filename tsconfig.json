@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "prod",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es2015",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "rootDir": "src",
+    "typeRoots": [
+      "/node_modules/@types",
+      "node"
+    ]
+  },
+  "include": [
+    "src/index.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

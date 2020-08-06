@@ -7,7 +7,9 @@
     "test": "jest",
     "start": "styleguidist server",
     "eslint": "eslint --fix src/components/**",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "pre-commit": "npm run eslint && npm test",
+    "post-merge": "npm install"
   },
   "keywords": [],
   "author": "",

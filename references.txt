@@ -1,0 +1,3 @@
+https://blog.harveydelaney.com/creating-your-own-react-component-library/
+https://medium.com/better-programming/building-a-react-components-library-f5a390d5973d
+https://www.sitepoint.com/react-with-typescript-best-practices/

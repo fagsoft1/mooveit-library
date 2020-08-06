@@ -35,6 +35,7 @@ module.exports = {
         'react',
         '@typescript-eslint',
     ],
+    ignorePatterns: ["*.stories.tsx"],
     rules: {
         "prettier/prettier": "error",
         "import/no-unresolved": "off",

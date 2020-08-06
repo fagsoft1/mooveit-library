@@ -1,29 +1,29 @@
-import { createContext } from "react";
+import {createContext} from 'react';
 
 export interface ITheme {
-  palette: {
-    primary: {
-      main: string;
-      contrast: string;
+    palette: {
+        primary: {
+            main: string;
+            contrast: string;
+        };
+        secondary: {
+            main: string;
+            contrast: string;
+        };
     };
-    secondary: {
-      main: string;
-      contrast: string;
-    };
-  };
 }
 
 const themes: ITheme = {
-  palette: {
-    primary: {
-      main: "green",
-      contrast: "black",
+    palette: {
+        primary: {
+            main: 'green',
+            contrast: 'black',
+        },
+        secondary: {
+            main: 'red',
+            contrast: 'white',
+        },
     },
-    secondary: {
-      main: "red",
-      contrast: "white",
-    },
-  },
 };
 
 const ThemeContext = createContext(themes);

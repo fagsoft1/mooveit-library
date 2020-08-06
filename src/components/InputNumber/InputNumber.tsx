@@ -1,13 +1,9 @@
-import React from "react";
-import InputText, { IInputText } from "@components/InputText/InputText";
+import React from 'react';
+import InputText from '@components/InputText/InputText';
 
-type IInputNumber = Omit<IInputText, "type">;
+import IInputNumber from '@components/InputNumber/InputNumber.types';
 
-const InputNumber: React.FC<IInputNumber> = ({
-  text,
-  name,
-  label,
-}: IInputNumber) => {
-  return <InputText text={text} label={label} name={name} type="number" />;
+const InputNumber: React.FC<IInputNumber> = ({text, name, label}: IInputNumber) => {
+    return <InputText text={text} label={label} name={name} type="number" />;
 };
 export default InputNumber;

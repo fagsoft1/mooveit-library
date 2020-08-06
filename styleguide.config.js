@@ -17,4 +17,6 @@ module.exports = {
             ]
         }
     },
+    title: "Moove It Library",
+    styleguideDir: "dist-docs"
 };

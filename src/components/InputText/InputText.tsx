@@ -1,16 +1,23 @@
 import React from "react";
 
-import {InputBase, IInputBase} from "../InputBase/InputBase";
+import InputBase, { IInputBase } from "@components/InputBase/InputBase";
 
-export interface IInputText extends Omit<IInputBase, 'children'> {
-    text: string,
-    type: string
+export interface IInputText extends Omit<IInputBase, "children"> {
+  text: string;
+  type: string;
 }
 
-const InputText = ({text, type = 'text', name, label}: IInputText) => {
-    return <InputBase name={name} label={label}>
-        <input type={type}>{text}</input>
-    </InputBase>;
+const InputText: React.FC<IInputText> = ({
+  text,
+  type = "text",
+  name,
+  label,
+}: IInputText) => {
+  return (
+    <InputBase name={name} label={label}>
+      <input type={type} value={text} />
+    </InputBase>
+  );
 };
 
-export {InputText}
+export default InputText;

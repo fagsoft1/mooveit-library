@@ -1,11 +1,6 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "modules": false
-      }
-    ],
+    "@babel/preset-env",
     "@babel/react",
     [
       "@babel/preset-typescript",
@@ -18,9 +13,10 @@
     [
       "module-resolver",
       {
-        "root": [
-          "./src"
-        ]
+        "root": ["./"],
+        "alias": {
+          "@components": "./src/components"
+        }
       }
     ]
   ]

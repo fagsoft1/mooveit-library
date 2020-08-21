@@ -1,16 +1,12 @@
-import React, {useContext} from 'react';
-import ThemeContext from '@components/Themes/ThemeContext';
-import IInputBase from '@components/InputBase/InputBase.types';
+import React from 'react';
+import IInputBase from './InputBase.types';
+import InputLabel from '../InputLabel/InputLabel';
 
-const InputBase: React.FC<IInputBase> = ({label, name, children}: IInputBase) => {
-    const theme = useContext(ThemeContext);
+const InputBase: React.FC<IInputBase> = ({label, value, name, onKeyUp, onChange}: IInputBase) => {
     return (
-        <>
-            <label style={{color: theme.palette.primary.main}} htmlFor={name}>
-                <span>{label} </span>
-            </label>
-            {children}
-        </>
+        <InputLabel label={label} name={name}>
+            <input value={value} onChange={onChange} onKeyUp={onKeyUp} />
+        </InputLabel>
     );
 };
 export default InputBase;

@@ -1,8 +1,8 @@
 import React, {useState, useMemo} from 'react';
-import InputBase from '@components/InputBase/InputBase';
+import InputLabel from '../InputLabel/InputLabel';
 import '../../stylesCCS.css';
 
-import IAutocomplete from '@components/Autocomplete/Autocomplete.types';
+import IAutocomplete from './Autocomplete.types';
 
 const Autocomplete: React.FC<IAutocomplete> = ({label, name, options}: IAutocomplete) => {
     const [activeOption, setActiveOption] = useState(0);
@@ -80,12 +80,12 @@ const Autocomplete: React.FC<IAutocomplete> = ({label, name, options}: IAutocomp
     }
 
     return (
-        <InputBase label={label} name={name}>
+        <InputLabel label={label} name={name}>
             <div>
                 <input type="text" className="search-box" onChange={onChange} onKeyDown={onKeyDown} value={userInput} />
                 {optionList}
             </div>
-        </InputBase>
+        </InputLabel>
     );
 };
 

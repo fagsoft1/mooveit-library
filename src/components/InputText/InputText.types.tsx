@@ -1,6 +1,5 @@
-import IInputBase from '@components/InputBase/InputBase.types';
+import IInputBase from '../InputBase/InputBase.types';
 
-export default interface IInputText extends Omit<IInputBase, 'children'> {
-    text: string;
-    type: string;
+export default interface IInputText extends IInputBase {
+    value: string;
 }

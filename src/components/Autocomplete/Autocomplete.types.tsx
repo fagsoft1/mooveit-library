@@ -1,5 +1,5 @@
-import IInputBase from '@components/InputBase/InputBase.types';
+import InputLabel from '../InputLabel/InputLabel.types';
 
-export default interface IAutocomplete extends Omit<IInputBase, 'children'> {
+export default interface IAutocomplete extends Omit<InputLabel, 'children'> {
     options: [string];
 }

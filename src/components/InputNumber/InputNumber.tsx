@@ -1,9 +1,29 @@
-import React from 'react';
-import InputText from '@components/InputText/InputText';
+import React, {useState} from 'react';
+import InputBase from '../InputBase/InputBase';
 
-import IInputNumber from '@components/InputNumber/InputNumber.types';
+import IInputNumber from './InputNumber.types';
 
-const InputNumber: React.FC<IInputNumber> = ({text, name, label}: IInputNumber) => {
-    return <InputText text={text} label={label} name={name} type="number" />;
+const InputNumber: React.FC<IInputNumber> = ({name, label, decimalSeparator = '.'}: IInputNumber) => {
+    const [currentValue, setCurrentValue] = useState('');
+    const justNumbers = (text: string) => text.replace(/[^0-9]/g, '');
+    const createMask = (text: string) => {
+        return text.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, `$1${decimalSeparator}`);
+    };
+    const destroyMask = (text: string) => {
+        return text.replace(/\D/g, '').substring(0, 40);
+    };
+    return (
+        <InputBase
+            onChange={(e) => {
+                setCurrentValue(justNumbers(e.target.value));
+            }}
+            onKeyUp={(e) => {
+                setCurrentValue(createMask(destroyMask(e.currentTarget.value)));
+            }}
+            value={currentValue}
+            label={label}
+            name={name}
+        />
+    );
 };
 export default InputNumber;

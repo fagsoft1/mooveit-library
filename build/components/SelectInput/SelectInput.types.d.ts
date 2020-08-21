@@ -1,9 +1,9 @@
-import IInputBase from "@components/InputBase/InputBase.types";
-export default interface ISelectInputItem {
+import InputLabel from '../InputLabel/InputLabel.types';
+export interface ISelectInputItem {
     value: number | string;
     text: string;
 }
-export default interface ISelectInput extends IInputBase {
+export default interface ISelectInput extends InputLabel {
     options: [ISelectInputItem];
     multiple?: boolean;
 }

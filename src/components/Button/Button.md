@@ -1,7 +1,7 @@
 A very simple button.
 
 ```jsx
-import Button from "./Button";
+import {Button} from "./Button";
 import ThemeContext from "../Themes/ThemeContext";
 const theme = {
     palette: {

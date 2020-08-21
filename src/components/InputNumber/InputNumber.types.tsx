@@ -1,5 +1,5 @@
-import IInputText from '@components/InputText/InputText.types';
+import IInputBase from '../InputBase/InputBase.types';
 
-export default interface IInputNumber extends Omit<IInputText, 'type'> {
-    try?: string;
+export default interface IInputNumber extends Omit<IInputBase, 'value'> {
+    decimalSeparator?: '.' | ',';
 }

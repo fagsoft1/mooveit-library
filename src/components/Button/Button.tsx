@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import ThemeContext from '@components/Themes/ThemeContext';
+import ThemeContext from '../Themes/ThemeContext';
 
-import IButton from '@components/Button/Button.types';
+import IButton from './Button.types';
 
 const Button: React.FC<IButton> = ({text, disabled = false, type = 'button', onClick}: IButton) => {
     const theme = useContext(ThemeContext);
@@ -19,4 +19,5 @@ const Button: React.FC<IButton> = ({text, disabled = false, type = 'button', onC
         </button>
     );
 };
+// eslint-disable-next-line import/prefer-default-export
 export default Button;

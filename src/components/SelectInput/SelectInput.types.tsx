@@ -5,7 +5,9 @@ export interface ISelectInputItem {
     text: string;
 }
 
-export default interface ISelectInput extends InputLabel {
+export default interface ISelectInput extends Omit<InputLabel, 'children'> {
+    value?: string | number | readonly string[] | undefined;
+    disabled?: boolean;
     options: [ISelectInputItem];
     multiple?: boolean;
 }

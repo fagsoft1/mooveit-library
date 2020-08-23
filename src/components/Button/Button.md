@@ -1,7 +1,7 @@
 A very simple button.
 
 ```jsx
-import {Button} from "./Button";
+import Button from "./Button";
 import ThemeContext from "../Themes/ThemeContext";
 const theme = {
     palette: {
@@ -10,6 +10,6 @@ const theme = {
     },
 };
 <ThemeContext.Provider value={theme}>
-    <Button text="Hello Moove It!"  onClick={()=>alert('You have clicked on me!')}/>
+    <Button text="Hello Moove It!"  onClick={()=>alert('You have clicked on me!')} />
 </ThemeContext.Provider>
 ```

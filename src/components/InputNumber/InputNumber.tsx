@@ -3,8 +3,14 @@ import InputBase from '../InputBase/InputBase';
 
 import IInputNumber from './InputNumber.types';
 
-const InputNumber: React.FC<IInputNumber> = ({name, label, decimalSeparator = '.'}: IInputNumber) => {
-    const [currentValue, setCurrentValue] = useState('');
+const InputNumber: React.FC<IInputNumber> = ({
+    name,
+    value = '',
+    label,
+    decimalSeparator = '.',
+    disabled = false,
+}: IInputNumber) => {
+    const [currentValue, setCurrentValue] = useState(value);
     const justNumbers = (text: string) => text.replace(/[^0-9]/g, '');
     const createMask = (text: string) => {
         return text.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, `$1${decimalSeparator}`);
@@ -14,6 +20,7 @@ const InputNumber: React.FC<IInputNumber> = ({name, label, decimalSeparator = '.
     };
     return (
         <InputBase
+            disabled={disabled}
             onChange={(e) => {
                 setCurrentValue(justNumbers(e.target.value));
             }}

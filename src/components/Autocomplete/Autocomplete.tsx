@@ -1,13 +1,15 @@
-import React, {useState, useMemo} from 'react';
-import InputLabel from '../InputLabel/InputLabel';
+import React, {useState, useEffect, useMemo} from 'react';
 import '../../stylesCCS.css';
 
 import IAutocomplete from './Autocomplete.types';
+import InputText from '../InputText/InputText';
 
-const Autocomplete: React.FC<IAutocomplete> = ({label, name, options}: IAutocomplete) => {
+const Autocomplete: React.FC<IAutocomplete> = ({value = '', label, name, options}: IAutocomplete) => {
     const [activeOption, setActiveOption] = useState(0);
     const [showOptions, setShowOptions] = useState(false);
-    const [userInput, setUserInput] = useState('');
+    const [userInput, setUserInput] = useState(value);
+
+    useEffect(() => setUserInput(value), [value]);
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         setShowOptions(true);
@@ -78,14 +80,18 @@ const Autocomplete: React.FC<IAutocomplete> = ({label, name, options}: IAutocomp
             );
         }
     }
-
     return (
-        <InputLabel label={label} name={name}>
-            <div>
-                <input type="text" className="search-box" onChange={onChange} onKeyDown={onKeyDown} value={userInput} />
-                {optionList}
-            </div>
-        </InputLabel>
+        <>
+            <InputText
+                label={label}
+                name={name}
+                className="search-box"
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                value={userInput}
+            />
+            {optionList}
+        </>
     );
 };
 

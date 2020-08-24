@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import IInputBase from './InputBase.types';
 import InputLabel from '../InputLabel/InputLabel';
+import ThemeContext from '../Themes/ThemeContext';
 
 const InputBase: React.FC<IInputBase> = ({
     label,
@@ -11,10 +12,14 @@ const InputBase: React.FC<IInputBase> = ({
     disabled,
     onKeyDown,
     className,
+    palette,
 }: IInputBase) => {
+    const theme = useContext(ThemeContext);
+    const currentPalette = palette === 'primary' ? theme.palette.primary : theme.palette.secondary;
     return (
-        <InputLabel label={label} name={name}>
+        <InputLabel label={label} name={name} palette={palette}>
             <input
+                style={{backgroundColor: currentPalette.main, color: currentPalette.contrast}}
                 className={className}
                 onKeyDown={onKeyDown}
                 value={value}

@@ -3,21 +3,21 @@ import ThemeContext from '../Themes/ThemeContext';
 
 import IButton from './Button.types';
 
-const Button: React.FC<IButton> = ({text, disabled = false, type = 'button', onClick}: IButton) => {
+const Button: React.FC<IButton> = ({text, disabled = false, type = 'button', onClick, palette}: IButton) => {
     const theme = useContext(ThemeContext);
+    const currentPalette = palette === 'primary' ? theme.palette.primary : theme.palette.secondary;
     return (
         <button
             onClick={onClick}
             disabled={disabled}
             type={type} // eslint-disable-line react/button-has-type
             style={{
-                background: theme.palette.primary.main,
-                color: theme.palette.primary.contrast,
+                background: currentPalette.main,
+                color: currentPalette.contrast,
             }}
         >
             {text}
         </button>
     );
 };
-// eslint-disable-next-line import/prefer-default-export
 export default Button;

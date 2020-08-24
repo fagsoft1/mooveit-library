@@ -2,14 +2,19 @@ A very simple button.
 
 ```jsx
 import Button from "./Button";
-import ThemeContext from "../Themes/ThemeContext";
+import ThemeContextProvider from "../Themes/ThemeContextProvider";
 const theme = {
     palette: {
-        primary: {main:'blue', contrast:'white'},
+        primary: {main:'red', contrast:'white'},
         secondary: {main:'yellow', contrast:'black'},
     },
 };
-<ThemeContext.Provider value={theme}>
-    <Button text="Hello Moove It!"  onClick={()=>alert('You have clicked on me!')} />
-</ThemeContext.Provider>
+<>
+<ThemeContextProvider theme={theme}>
+    <Button text="Hello Moove It!" onClick={()=>alert('You have clicked on me!')} palette='primary' />
+    <Button text="Hello Moove It!"  onClick={()=>alert('You have clicked on me!')} palette='secondary' />
+</ThemeContextProvider>
+<Button text="Hello Moove It!"  onClick={()=>alert('You have clicked on me!')} palette='primary' />
+
+</>
 ```

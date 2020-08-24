@@ -1,10 +1,25 @@
 import React from 'react';
 import {fireEvent, screen, render, cleanup} from '@testing-library/react';
 import InputNumber from './InputNumber';
+import ThemeContextProvider from "../Themes/ThemeContextProvider";
 //https://www.freecodecamp.org/news/testing-react-hooks/
 afterEach(cleanup)
 
-const renderInputNumber = ({label = 'My Label', disabled = false, name = 'my_name', onChange, value = '0', decimalSeparator = ','}) => {
+const theme = {palette: {primary: {main: 'green', contrast: 'black'}, secondary: {main: 'blue', contrast: 'white'}}};
+
+const renderInputNumberWithTheme = ({palette = 'primary'}) => {
+    const utils = render(<ThemeContextProvider theme={theme}><InputNumber name={'name'} label={'label'} value={'value'}
+                                                                          palette={palette}/></ThemeContextProvider>)
+    const input = screen.getByLabelText('label');
+    return {
+        input,
+        rerender: (changed_props) => utils.rerender(<ThemeContextProvider theme={theme}>
+            <InputNumber name={'name'} label={'label'} value={'value'} palette={palette} {...changed_props}/>
+        </ThemeContextProvider>)
+    }
+};
+
+const renderInputNumber = ({label = 'My Label', disabled = false, name = 'my_name', onChange, value = '0', decimalSeparator = ',', palette = 'primary'}) => {
     const utils = render(<InputNumber
         decimalSeparator={decimalSeparator}
         onChange={onChange}
@@ -12,6 +27,7 @@ const renderInputNumber = ({label = 'My Label', disabled = false, name = 'my_nam
         label={label}
         disabled={disabled}
         value={value}
+        palette={palette}
     />)
     const input = screen.getByLabelText(label);
     return {
@@ -28,6 +44,7 @@ const renderInputNumber = ({label = 'My Label', disabled = false, name = 'my_nam
             label={label}
             disabled={disabled}
             value={value}
+            palette={palette}
             {...changed_props}
         />)
     }
@@ -68,4 +85,20 @@ describe('<InputNumber />', () => {
         onKeyUp('1');
         expect(input.value).toBe('1,000');
     })
+    test('should have default theme', () => {
+        const {input, rerender} = renderInputNumber({});
+        expect(input.style.color).toBe('white');
+        expect(input.style.backgroundColor).toBe('black');
+        rerender({palette: 'secondary'})
+        expect(input.style.color).toBe('white');
+        expect(input.style.backgroundColor).toBe('red');
+    });
+    test('should use custom theme', () => {
+        const {input, rerender} = renderInputNumberWithTheme({});
+        expect(input.style.color).toBe(theme.palette.primary.contrast);
+        expect(input.style.backgroundColor).toBe(theme.palette.primary.main);
+        rerender({palette: 'secondary'})
+        expect(input.style.color).toBe(theme.palette.secondary.contrast);
+        expect(input.style.backgroundColor).toBe(theme.palette.secondary.main);
+    });
 })

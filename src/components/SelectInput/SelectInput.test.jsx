@@ -1,9 +1,28 @@
 import React from 'react';
 import {fireEvent, screen, render, cleanup} from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
+import ThemeContextProvider from "../Themes/ThemeContextProvider";
 import SelectInput from './SelectInput';
 //https://www.freecodecamp.org/news/testing-react-hooks/
 afterEach(cleanup)
+
+const theme = {palette: {primary: {main: 'green', contrast: 'black'}, secondary: {main: 'blue', contrast: 'white'}}};
+
+const renderSelectInputWithTheme = ({palette = 'primary'}) => {
+    const utils = render(<ThemeContextProvider theme={theme}>
+        <SelectInput name={'name'} label={'label'} value={'value'}
+                     options={[{value: '1', text: 'One'}]}
+                     palette={palette}/>
+    </ThemeContextProvider>)
+    const input = screen.getByLabelText('label');
+    return {
+        input,
+        rerender: (changed_props) => utils.rerender(<ThemeContextProvider theme={theme}>
+            <SelectInput name={'name'} label={'label'} value={'value'} options={[{value: '1', text: 'One'}]}
+                         palette={palette} {...changed_props}/>
+        </ThemeContextProvider>)
+    }
+};
 
 const renderSelectInput = (
     {
@@ -13,6 +32,7 @@ const renderSelectInput = (
         onChange,
         value = '0',
         multiple = false,
+        palette = 'primary',
         options = [{
             text: 'Uno',
             value: '1'
@@ -35,6 +55,7 @@ const renderSelectInput = (
         label={label}
         disabled={disabled}
         value={value}
+        palette={palette}
     />)
     const input = screen.getByTestId(name);
     return {
@@ -53,6 +74,7 @@ const renderSelectInput = (
             disabled={disabled}
             onChange={onChange}
             value={value}
+            palette={palette}
             {...changed_props}
         />)
     }
@@ -95,5 +117,21 @@ describe('<SelectInput />', () => {
         deselectOptions(['4']);
         expect(getByText('Dos').selected).toBeFalsy();
         expect(getByText('Cuatro').selected).toBeFalsy();
+    });
+    test('should have default theme', () => {
+        const {input, rerender} = renderSelectInput({});
+        expect(input.style.color).toBe('white');
+        expect(input.style.backgroundColor).toBe('black');
+        rerender({palette: 'secondary'})
+        expect(input.style.color).toBe('white');
+        expect(input.style.backgroundColor).toBe('red');
+    });
+    test('should use custom theme', () => {
+        const {input, rerender} = renderSelectInputWithTheme({});
+        expect(input.style.color).toBe(theme.palette.primary.contrast);
+        expect(input.style.backgroundColor).toBe(theme.palette.primary.main);
+        rerender({palette: 'secondary'})
+        expect(input.style.color).toBe(theme.palette.secondary.contrast);
+        expect(input.style.backgroundColor).toBe(theme.palette.secondary.main);
     });
 })

@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import InputLabel from '../InputLabel/InputLabel';
 import ISelectInput from './SelectInput.types';
+import ThemeContext from '../Themes/ThemeContext';
 
 const SelectInput: React.FC<ISelectInput> = ({
     options,
@@ -10,14 +11,21 @@ const SelectInput: React.FC<ISelectInput> = ({
     disabled = false,
     value = undefined,
     onChange,
+    palette = 'primary',
 }: ISelectInput) => {
     const [currentValue, setCurrentValue] = useState(value);
     useEffect(() => {
         setCurrentValue(value);
     }, [value]);
+    const theme = useContext(ThemeContext);
+    const currentPalette = palette === 'primary' ? theme.palette.primary : theme.palette.secondary;
     return (
-        <InputLabel label={label} name={name}>
+        <InputLabel label={label} name={name} palette={palette}>
             <select
+                style={{
+                    background: currentPalette.main,
+                    color: currentPalette.contrast,
+                }}
                 name={name}
                 id={name}
                 data-testid={name}

@@ -10,6 +10,7 @@ const InputNumber: React.FC<IInputNumber> = ({
     onChange,
     decimalSeparator = '.',
     disabled = false,
+    palette = 'primary',
 }: IInputNumber) => {
     const [currentValue, setCurrentValue] = useState(value);
     const justNumbers = (text: string) => text.replace(/[^0-9]/g, '');
@@ -21,6 +22,7 @@ const InputNumber: React.FC<IInputNumber> = ({
     };
     return (
         <InputBase
+            palette={palette}
             disabled={disabled}
             onChange={(e) => {
                 setCurrentValue(justNumbers(e.target.value));

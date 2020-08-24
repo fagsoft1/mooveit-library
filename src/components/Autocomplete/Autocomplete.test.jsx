@@ -1,11 +1,41 @@
 import React from 'react';
 import {fireEvent, screen, render, cleanup, getByDisplayValue, getByText} from '@testing-library/react';
 import Autocomplete from '../Autocomplete/Autocomplete';
+import ThemeContextProvider from "../Themes/ThemeContextProvider";
 //https://www.freecodecamp.org/news/testing-react-hooks/
 afterEach(cleanup)
 
-const renderAutocomplete = ({label = 'My Label', disabled = false, name = 'my_name', onChange, value = 'Lion', options = ['Lion', 'Lizard', 'Cow', 'Pig', 'Bird']}) => {
+const theme = {palette: {primary: {main: 'green', contrast: 'black'}, secondary: {main: 'blue', contrast: 'white'}}};
+
+const renderAutocompleteWithTheme = ({palette = 'primary'}) => {
+    const utils = render(<ThemeContextProvider theme={theme}>
+        <Autocomplete
+            palette={palette}
+            options={['']}
+            name={'name'}
+            label={'label'}
+            value={''}
+        />
+    </ThemeContextProvider>)
+    const input = screen.getByLabelText('label');
+    return {
+        input,
+        rerender: (changed_props) => utils.rerender(<ThemeContextProvider theme={theme}>
+            <Autocomplete
+                palette={palette}
+                options={['']}
+                name={'name'}
+                label={'label'}
+                value={''}
+                {...changed_props}
+            />
+        </ThemeContextProvider>)
+    }
+};
+
+const renderAutocomplete = ({palette = 'primary', label = 'My Label', disabled = false, name = 'my_name', onChange, value = 'Lion', options = ['Lion', 'Lizard', 'Cow', 'Pig', 'Bird']}) => {
     const utils = render(<Autocomplete
+        palette={palette}
         options={options}
         onChange={onChange}
         name={name}
@@ -22,6 +52,7 @@ const renderAutocomplete = ({label = 'My Label', disabled = false, name = 'my_na
         enter: () => fireEvent.keyDown(input, {key: 'Enter', keyCode: 13}),
         onChange: (value) => fireEvent.change(input, {target: {value}}),
         rerender: (changed_props) => utils.rerender(<Autocomplete
+            palette={palette}
             options={options}
             onChange={onChange}
             name={name}
@@ -67,5 +98,21 @@ describe('<Autocomplete />', () => {
         onDown();// 2
         enter();
         expect(input.value).toBe('Ant3');
+    });
+    test('should have default theme', () => {
+        const {input, rerender} = renderAutocomplete({});
+        expect(input.style.color).toBe('white');
+        expect(input.style.backgroundColor).toBe('black');
+        rerender({palette: 'secondary'})
+        expect(input.style.color).toBe('white');
+        expect(input.style.backgroundColor).toBe('red');
+    });
+    test('should use custom theme', () => {
+        const {input, rerender} = renderAutocompleteWithTheme({});
+        expect(input.style.color).toBe(theme.palette.primary.contrast);
+        expect(input.style.backgroundColor).toBe(theme.palette.primary.main);
+        rerender({palette: 'secondary'})
+        expect(input.style.color).toBe(theme.palette.secondary.contrast);
+        expect(input.style.backgroundColor).toBe(theme.palette.secondary.main);
     });
 })

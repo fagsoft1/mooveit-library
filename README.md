@@ -17,12 +17,12 @@ These is all the dependencies you need to used this library.
 To install them, just run:
 ```
 // with npm
-npm run react
-npm run react-dom
+npm install react
+npm install react-dom
 
 // with yarn
-yarn run react
-yarn run react-dom
+yarn add react
+yarn add react-dom
 ```
 
 ### Installing

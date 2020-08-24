@@ -47,9 +47,6 @@ import {Button} from 'mooveit-library-fagsoft';
 ```
 // with npm
 npm run test
-
-// with yarn
-yarn run test
 ```
 
 ### Break down into end to end tests

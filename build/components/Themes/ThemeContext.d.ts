@@ -1,14 +1,3 @@
-export interface ITheme {
-    palette: {
-        primary: {
-            main: string;
-            contrast: string;
-        };
-        secondary: {
-            main: string;
-            contrast: string;
-        };
-    };
-}
+import { ITheme } from './ThemeContextProvider.types';
 declare const ThemeContext: import("react").Context<ITheme>;
 export default ThemeContext;

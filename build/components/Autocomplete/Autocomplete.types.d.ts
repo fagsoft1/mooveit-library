@@ -1,6 +1,6 @@
 import React from 'react';
-import InputLabel from '../InputLabel/InputLabel.types';
-export default interface IAutocomplete extends Omit<InputLabel, 'children'> {
+import IInputText from '../InputText/InputText.types';
+export default interface IAutocomplete extends Omit<IInputText, 'children' | 'onKeyDown' | 'onKeyUp'> {
     onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
     options: [string];
     value: string;

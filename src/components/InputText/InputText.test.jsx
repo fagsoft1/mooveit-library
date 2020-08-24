@@ -34,5 +34,6 @@ describe('<InputText />', () => {
         expect(input.value === newValue).toBeFalsy();
         onChange(newValue);
         expect(input.value === newValue).toBeTruthy();
+        expect(onChangeMock).toBeCalled();
     });
 })

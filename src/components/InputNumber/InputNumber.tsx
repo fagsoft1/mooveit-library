@@ -7,6 +7,7 @@ const InputNumber: React.FC<IInputNumber> = ({
     name,
     value = '',
     label,
+    onChange,
     decimalSeparator = '.',
     disabled = false,
 }: IInputNumber) => {
@@ -23,6 +24,9 @@ const InputNumber: React.FC<IInputNumber> = ({
             disabled={disabled}
             onChange={(e) => {
                 setCurrentValue(justNumbers(e.target.value));
+                if (onChange) {
+                    onChange(e);
+                }
             }}
             onKeyUp={(e) => {
                 setCurrentValue(createMask(destroyMask(e.currentTarget.value)));

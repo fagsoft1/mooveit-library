@@ -51,6 +51,7 @@ describe('<InputNumber />', () => {
         expect(input.value === newValue).toBeFalsy();
         onChange(newValue);
         expect(input.value === newValue).toBeTruthy();
+        expect(onChangeMock).toBeCalled();
     });
     test('should not allow letters to be inputted', () => {
         const {input, onChange} = renderInputNumber({label: 'Name', value: '1000'})

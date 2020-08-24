@@ -39,9 +39,11 @@ describe('<Autocomplete />', () => {
         expect(input.value === 'Cow');
     });
     test('should handle onChange', () => {
-        const {input, onChange} = renderAutocomplete({label: 'Name'})
+        const onChangeMock = jest.fn();
+        const {input, onChange} = renderAutocomplete({label: 'Name', onChange: onChangeMock})
         onChange('Pi')
         expect(input.value === 'Pi');
+        expect(onChangeMock).toBeCalled();
     });
     test('should show current options like Li', () => {
         const {onChange} = renderAutocomplete({label: 'Name', value: 'Cow'})

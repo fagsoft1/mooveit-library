@@ -24,17 +24,6 @@ describe('<Button />', () => {
         onClick();
         expect(onClickMock).toBeCalled();
     });
-    test('should disable and enable button', () => {
-        const onClickMock = jest.fn();
-        const text = 'My Text';
-        const {onClick, rerender} = renderButton({onClick: onClickMock, text, disabled: true})
-        onClick();
-        expect(onClickMock).not.toBeCalled();
-        rerender({disabled: false})
-        onClick();
-        expect(onClickMock).toBeCalled();
-
-    });
     test('should display text', () => {
         const text = "New Text!";
         const {getByText} = renderButton({text})

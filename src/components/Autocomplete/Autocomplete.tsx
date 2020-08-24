@@ -4,17 +4,20 @@ import '../../stylesCCS.css';
 import IAutocomplete from './Autocomplete.types';
 import InputText from '../InputText/InputText';
 
-const Autocomplete: React.FC<IAutocomplete> = ({value = '', label, name, options}: IAutocomplete) => {
+const Autocomplete: React.FC<IAutocomplete> = ({value = '', label, name, onChange, options}: IAutocomplete) => {
     const [activeOption, setActiveOption] = useState(0);
     const [showOptions, setShowOptions] = useState(false);
     const [userInput, setUserInput] = useState(value);
 
     useEffect(() => setUserInput(value), [value]);
 
-    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setShowOptions(true);
         setActiveOption(0);
         setUserInput(e.currentTarget.value);
+        if (onChange) {
+            onChange(e);
+        }
     };
 
     const filteredOptions = useMemo(() => {
@@ -86,7 +89,7 @@ const Autocomplete: React.FC<IAutocomplete> = ({value = '', label, name, options
                 label={label}
                 name={name}
                 className="search-box"
-                onChange={onChange}
+                onChange={onChangeHandler}
                 onKeyDown={onKeyDown}
                 value={userInput}
             />

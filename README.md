@@ -65,4 +65,4 @@ Each test will check components and their features / behaviors.
 ## Acknowledgments
 
 Mooveit Library Fagsoft has been created to complete a coding challenge. 
-Is an project not only to achieve the goal of completing the code challenge but also a way to learn new things.
+Is a project not only to achieve the goal of completing the code challenge but also a way to learn new things.

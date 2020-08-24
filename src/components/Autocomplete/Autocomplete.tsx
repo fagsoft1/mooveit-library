@@ -4,7 +4,14 @@ import '../../stylesCCS.css';
 import IAutocomplete from './Autocomplete.types';
 import InputText from '../InputText/InputText';
 
-const Autocomplete: React.FC<IAutocomplete> = ({value = '', label, name, onChange, options, palette}: IAutocomplete) => {
+const Autocomplete: React.FC<IAutocomplete> = ({
+    value = '',
+    label,
+    name,
+    onChange,
+    options,
+    palette,
+}: IAutocomplete) => {
     const [activeOption, setActiveOption] = useState(0);
     const [showOptions, setShowOptions] = useState(false);
     const [userInput, setUserInput] = useState(value);

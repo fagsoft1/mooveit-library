@@ -4,6 +4,7 @@ export default interface IInputBase extends Omit<IInputLabel, 'children'> {
     value: string;
     disabled?: boolean;
     className?: string;
+    placeholder?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;

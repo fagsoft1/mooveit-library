@@ -11,6 +11,8 @@ const Autocomplete: React.FC<IAutocomplete> = ({
     onChange,
     options,
     palette,
+    placeholder,
+    disabled,
 }: IAutocomplete) => {
     const [activeOption, setActiveOption] = useState(0);
     const [showOptions, setShowOptions] = useState(false);
@@ -100,6 +102,8 @@ const Autocomplete: React.FC<IAutocomplete> = ({
                 onChange={onChangeHandler}
                 onKeyDown={onKeyDown}
                 value={userInput}
+                disabled={disabled}
+                placeholder={placeholder}
             />
             {optionList}
         </>

@@ -3,7 +3,7 @@ import InputBase from '../InputBase/InputBase';
 import IInputText from './InputText.types';
 
 const InputText: React.FC<IInputText> = (props: IInputText) => {
-    const {value = '', disabled = false, name, label, className, onKeyDown, onChange, palette} = props;
+    const {value = '', disabled = false, name, label, className, onKeyDown, onChange, palette, placeholder} = props;
     const [currentValue, setCurrentValue] = useState(value);
     useEffect(() => {
         setCurrentValue(value);
@@ -16,6 +16,7 @@ const InputText: React.FC<IInputText> = (props: IInputText) => {
             name={name}
             label={label}
             onKeyDown={onKeyDown}
+            placeholder={placeholder}
             onChange={(e) => {
                 setCurrentValue(e.target.value);
                 if (onChange) {

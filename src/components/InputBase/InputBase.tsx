@@ -13,13 +13,15 @@ const InputBase: React.FC<IInputBase> = ({
     onKeyDown,
     className,
     palette,
+    placeholder,
 }: IInputBase) => {
     const theme = useContext(ThemeContext);
     const currentPalette = palette === 'primary' ? theme.palette.primary : theme.palette.secondary;
     return (
         <InputLabel label={label} name={name} palette={palette}>
             <input
-                style={{backgroundColor: currentPalette.main, color: currentPalette.contrast}}
+                placeholder={placeholder}
+                style={{backgroundColor: disabled ? 'gray' : currentPalette.main, color: currentPalette.contrast}}
                 className={className}
                 onKeyDown={onKeyDown}
                 value={value}
